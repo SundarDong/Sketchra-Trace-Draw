@@ -69,6 +69,10 @@ flutter:
     - assets/images/collections/animal/
     - assets/images/collections/chibi/
     - assets/images/collections/birds/
+    - assets/images/collections/food/
+    - assets/images/collections/Halloween/
+    - assets/images/collections/Christmas/
+    - assets/images/collections/Vehicle/
     - assets/images/topics/
 
   # An image asset can refer to one or more resolution-specific "variants", see
