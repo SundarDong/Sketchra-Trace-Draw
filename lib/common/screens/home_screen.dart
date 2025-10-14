@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchtrace/common/screens/drawing_topics_screen.dart';
+import 'package:sketchtrace/common/screens/settings_screen.dart';
 //import 'package:sketchtrace/core/widgets/customappbar.dart';
 import 'package:sketchtrace/core/widgets/menu_button.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
@@ -39,6 +40,12 @@ class HomeScreen extends StatelessWidget {
               imagePath: 'assets/images/c.png',
               onTap: () {
                 // Navigate to settings screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SettingsScreen(),
+                  ),
+                );
               },
             ),
           ],
