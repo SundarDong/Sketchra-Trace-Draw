@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sketchtrace/common/screens/drawing_topics_screen.dart';
+import 'package:sketchtrace/common/screens/guide_screen.dart';
 import 'package:sketchtrace/common/screens/settings_screen.dart';
 //import 'package:sketchtrace/core/widgets/customappbar.dart';
 import 'package:sketchtrace/core/widgets/menu_button.dart';
@@ -33,6 +34,10 @@ class HomeScreen extends StatelessWidget {
               imagePath: 'assets/images/b.png',
               onTap: () {
                 // Navigate to guide screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const GuideScreen()),
+                );
               },
             ),
             const SizedBox(height: 20),

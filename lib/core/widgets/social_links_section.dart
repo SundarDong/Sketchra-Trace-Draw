@@ -1,0 +1,99 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sketchtrace/core/widgets/social_button.dart';
+
+class SocialLinksSection extends StatelessWidget {
+  final Future<void> Function(String) onLaunchUrl;
+
+  const SocialLinksSection({super.key, required this.onLaunchUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Text(
+            'Connect With Us',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Colors.grey.shade800,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Follow us on social media',
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+          ),
+          const SizedBox(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SocialButton(
+                icon: FontAwesomeIcons.facebook,
+                color: const Color(0xFF1877F2),
+                label: 'Facebook',
+                url: 'https://facebook.com/yourpage',
+                onTap: onLaunchUrl,
+              ),
+              SocialButton(
+                icon: FontAwesomeIcons.instagram,
+                color: const Color(0xFFE4405F),
+                label: 'Instagram',
+                url: 'https://instagram.com/yourpage',
+                onTap: onLaunchUrl,
+              ),
+              SocialButton(
+                icon: FontAwesomeIcons.youtube,
+                color: const Color(0xFFFF0000),
+                label: 'YouTube',
+                url: 'https://youtube.com/yourchannel',
+                onTap: onLaunchUrl,
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SocialButton(
+                icon: FontAwesomeIcons.twitter,
+                color: const Color(0xFF1DA1F2),
+                label: 'Twitter',
+                url: 'https://twitter.com/yourpage',
+                onTap: onLaunchUrl,
+              ),
+              SocialButton(
+                icon: FontAwesomeIcons.tiktok,
+                color: Colors.black,
+                label: 'TikTok',
+                url: 'https://tiktok.com/@yourpage',
+                onTap: onLaunchUrl,
+              ),
+              SocialButton(
+                icon: FontAwesomeIcons.globe,
+                color: const Color(0xFF0088CC),
+                label: 'Website',
+                url: 'https://yourwebsite.com',
+                onTap: onLaunchUrl,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
