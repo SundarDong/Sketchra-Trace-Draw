@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 class TraceScreen extends StatefulWidget {
   final String imagePath;
@@ -14,71 +15,68 @@ class _TraceScreenState extends State<TraceScreen> {
   double opacity = 1.0;
   bool isLocked = false;
   bool isExtended = false;
+  bool isFlipped = false;
 
   double _scale = 1.0;
+  double _rotation = 0.0; // rotation in radians
   Offset _offset = Offset.zero;
+
   Offset _startFocalPoint = Offset.zero;
   double _startScale = 1.0;
+  double _startRotation = 0.0;
+  Offset _startOffset = Offset.zero;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white.withOpacity(0.5),
-                    blurRadius: 20,
-                    spreadRadius: 10,
-                  ),
-                ],
-              ),
-            ),
-          ),
+          Positioned.fill(child: Container(color: Colors.white)),
 
-          // ✅ FIXED — image supports both assets and files
+          // IMAGE WITH ZOOM, ROTATE, PAN, FLIP
           Positioned.fill(
             child: GestureDetector(
               onScaleStart: isLocked
                   ? null
                   : (details) {
                       _startScale = _scale;
-                      _startFocalPoint = details.focalPoint - _offset;
+                      _startRotation = _rotation;
+                      _startOffset = _offset;
+                      _startFocalPoint = details.focalPoint;
                     },
               onScaleUpdate: isLocked
                   ? null
                   : (details) {
                       setState(() {
                         _scale = (_startScale * details.scale).clamp(0.5, 5.0);
-                        _offset =
-                            details.focalPoint -
-                            _startFocalPoint * details.scale;
+                        _rotation = _startRotation + details.rotation;
+
+                        final delta = details.focalPoint - _startFocalPoint;
+                        _offset = _startOffset + delta;
                       });
                     },
-              child: Transform.translate(
-                offset: _offset,
-                child: Transform.scale(
-                  scale: _scale,
-                  child: Center(
-                    child: Opacity(
-                      opacity: opacity,
-                      child: widget.imagePath.startsWith('assets/')
-                          ? Image.asset(widget.imagePath, fit: BoxFit.contain)
-                          : Image.file(
-                              File(widget.imagePath),
-                              fit: BoxFit.contain,
-                            ),
-                    ),
+              child: Center(
+                child: Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..translate(_offset.dx, _offset.dy)
+                    ..rotateZ(_rotation)
+                    ..scale(isFlipped ? -_scale : _scale, _scale),
+                  child: Opacity(
+                    opacity: opacity,
+                    child: widget.imagePath.startsWith('assets/')
+                        ? Image.asset(widget.imagePath, fit: BoxFit.contain)
+                        : Image.file(
+                            File(widget.imagePath),
+                            fit: BoxFit.contain,
+                          ),
                   ),
                 ),
               ),
             ),
           ),
 
+          // TOP BUTTONS
           if (!isExtended)
             Positioned(
               top: 0,
@@ -86,43 +84,22 @@ class _TraceScreenState extends State<TraceScreen> {
               right: 0,
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      GestureDetector(
+                      _topButton(
+                        icon: Icons.arrow_back,
                         onTap: () => Navigator.pop(context),
-                        child: Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade200,
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.arrow_back,
-                            color: Colors.black87,
-                            size: 28,
-                          ),
-                        ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade200,
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.help_outline,
-                          color: Colors.black87,
-                          size: 28,
-                        ),
-                      ),
+                      _topButton(icon: Icons.help_outline, onTap: () {}),
                     ],
                   ),
                 ),
               ),
             ),
 
+          // BOTTOM CONTROLS
           if (!isExtended)
             Positioned(
               bottom: 0,
@@ -152,6 +129,12 @@ class _TraceScreenState extends State<TraceScreen> {
                             : Colors.grey.shade700,
                       ),
                       _buildControlButton(
+                        icon: Icons.flip,
+                        label: 'Flip',
+                        onTap: () => setState(() => isFlipped = !isFlipped),
+                        color: Colors.grey.shade700,
+                      ),
+                      _buildControlButton(
                         icon: Icons.fullscreen,
                         label: 'Extent',
                         onTap: () => setState(() => isExtended = !isExtended),
@@ -163,29 +146,33 @@ class _TraceScreenState extends State<TraceScreen> {
               ),
             ),
 
+          // EXIT FULLSCREEN
           if (isExtended)
             Positioned(
               top: 40,
               right: 20,
               child: SafeArea(
-                child: GestureDetector(
+                child: _topButton(
+                  icon: Icons.fullscreen_exit,
                   onTap: () => setState(() => isExtended = false),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.fullscreen_exit,
-                      color: Colors.black87,
-                      size: 28,
-                    ),
-                  ),
                 ),
               ),
             ),
         ],
+      ),
+    );
+  }
+
+  Widget _topButton({required IconData icon, required VoidCallback onTap}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          shape: BoxShape.circle,
+        ),
+        child: Icon(icon, color: Colors.black87, size: 28),
       ),
     );
   }
@@ -230,23 +217,13 @@ class _TraceScreenState extends State<TraceScreen> {
       isScrollControlled: true,
       builder: (context) {
         double localOpacity = opacity;
-
         return StatefulBuilder(
           builder: (context, setModalState) {
             return Container(
               padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    blurRadius: 10,
-                    offset: const Offset(0, -5),
-                  ),
-                ],
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -274,11 +251,7 @@ class _TraceScreenState extends State<TraceScreen> {
                   const SizedBox(height: 10),
                   Text(
                     '${(localOpacity * 100).toInt()}%',
-                    style: const TextStyle(
-                      color: Colors.black87,
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
-                    ),
+                    style: const TextStyle(color: Colors.black87, fontSize: 16),
                   ),
                   const SizedBox(height: 20),
                   SizedBox(

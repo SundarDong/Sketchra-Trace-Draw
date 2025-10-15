@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sketchtrace/core/widgets/social_button.dart';
 
 class SocialLinksSection extends StatelessWidget {
@@ -43,21 +42,21 @@ class SocialLinksSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SocialButton(
-                icon: FontAwesomeIcons.facebook,
+                icon: Icons.facebook,
                 color: const Color(0xFF1877F2),
                 label: 'Facebook',
                 url: 'https://facebook.com/yourpage',
                 onTap: onLaunchUrl,
               ),
               SocialButton(
-                icon: FontAwesomeIcons.instagram,
+                icon: Icons.camera_alt, // For Instagram
                 color: const Color(0xFFE4405F),
                 label: 'Instagram',
                 url: 'https://instagram.com/yourpage',
                 onTap: onLaunchUrl,
               ),
               SocialButton(
-                icon: FontAwesomeIcons.youtube,
+                icon: Icons.ondemand_video, // For YouTube
                 color: const Color(0xFFFF0000),
                 label: 'YouTube',
                 url: 'https://youtube.com/yourchannel',
@@ -70,21 +69,21 @@ class SocialLinksSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SocialButton(
-                icon: FontAwesomeIcons.twitter,
+                icon: Icons.chat, // For Twitter
                 color: const Color(0xFF1DA1F2),
                 label: 'Twitter',
                 url: 'https://twitter.com/yourpage',
                 onTap: onLaunchUrl,
               ),
               SocialButton(
-                icon: FontAwesomeIcons.tiktok,
+                icon: Icons.music_note, // For TikTok
                 color: Colors.black,
                 label: 'TikTok',
                 url: 'https://tiktok.com/@yourpage',
                 onTap: onLaunchUrl,
               ),
               SocialButton(
-                icon: FontAwesomeIcons.globe,
+                icon: Icons.public, // For Website
                 color: const Color(0xFF0088CC),
                 label: 'Website',
                 url: 'https://yourwebsite.com',

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 import 'package:sketchtrace/core/widgets/social_links_section.dart';
 import 'package:sketchtrace/core/widgets/tutorial_slider_widget.dart';
-
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
