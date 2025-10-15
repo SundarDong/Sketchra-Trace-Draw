@@ -18,14 +18,12 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
   final List<TutorialStep> _steps = [
     TutorialStep(
       stepNumber: 1,
-      title: 'Place the Glass',
       description: 'Place a glass upside down on top of a sheet of paper.',
       imagePath: 'assets/images/guide/step1.png',
       color: const Color(0xFF6366F1),
     ),
     TutorialStep(
       stepNumber: 2,
-      title: 'Position Your Phone',
       description:
           'Position your phone on top of the glass— the Sketchra app will project the image using your camera view.',
       imagePath: 'assets/images/guide/step2.png',
@@ -33,7 +31,6 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
     ),
     TutorialStep(
       stepNumber: 3,
-      title: 'Adjust the Image',
       description:
           'Select the image and adjust the opacity and size to align the virtual image perfectly with your paper.',
       imagePath: 'assets/images/guide/step3.png',
@@ -41,7 +38,6 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
     ),
     TutorialStep(
       stepNumber: 4,
-      title: 'Trace & Complete',
       description:
           'Trace the visible lines on your paper while looking through your phone screen. Once finished, add details and shading to complete your sketch.',
       imagePath: 'assets/images/guide/step4.png',

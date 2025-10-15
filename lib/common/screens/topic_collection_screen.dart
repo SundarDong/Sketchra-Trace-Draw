@@ -1,4 +1,3 @@
-// lib/screens/topic_collection_screen.dart
 import 'package:flutter/material.dart';
 import 'package:sketchtrace/models/topic_model.dart';
 import 'package:sketchtrace/common/screens/select_mode_screen.dart';

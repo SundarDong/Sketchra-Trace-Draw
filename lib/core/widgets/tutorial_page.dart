@@ -25,16 +25,19 @@ class TutorialPage extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     // Step number circle
+                    // Step number circle
                     Container(
-                      width: 45,
-                      height: 45,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                        vertical: 10,
+                      ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                           colors: [step.color, step.color.withOpacity(0.7)],
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        shape: BoxShape.circle,
+                        borderRadius: BorderRadius.circular(30),
                         boxShadow: [
                           BoxShadow(
                             color: step.color.withOpacity(0.3),
@@ -43,23 +46,21 @@ class TutorialPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Center(
-                        child: Text(
-                          '${step.stepNumber}',
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
+                      child: Text(
+                        'Steps ${step.stepNumber}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
                     ),
 
                     const SizedBox(height: 20),
 
-                    // Bigger image container
+                    //image container
                     Container(
-                      width: 180, // Increased image size
+                      width: 180,
                       height: 180,
                       decoration: BoxDecoration(
                         color: step.color.withOpacity(0.1),
@@ -87,19 +88,6 @@ class TutorialPage extends StatelessWidget {
 
                     const SizedBox(height: 20),
 
-                    // Title
-                    Text(
-                      step.title,
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey.shade800,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-
-                    const SizedBox(height: 10),
-
                     // Description
                     Text(
                       step.description,
@@ -107,6 +95,7 @@ class TutorialPage extends StatelessWidget {
                         fontSize: 13,
                         color: Colors.grey.shade600,
                         height: 1.5,
+                        fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,
                     ),

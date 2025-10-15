@@ -2,19 +2,44 @@ import 'package:flutter/material.dart';
 
 class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final Color? backgroundColor;
+  final Gradient? gradient;
+  final Color? titleColor;
+  final Color? iconColor;
+  final List<Widget>? actions;
 
-  const ModernAppBar({super.key, required this.title});
+  const ModernAppBar({
+    super.key,
+    required this.title,
+    this.backgroundColor,
+    this.gradient,
+    this.titleColor,
+    this.iconColor,
+    this.actions,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white,
+        gradient:
+            gradient ??
+            LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                const Color(0xFFFF69B4), // Hot pink
+                const Color(0xFFFF1493), // Deep pink
+                const Color(0xFFFFC0CB).withOpacity(0.8), // Light pink
+              ],
+              stops: const [0.0, 0.5, 1.0],
+            ),
+        color: backgroundColor,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 2),
+            color: const Color(0xFFFF69B4).withOpacity(0.3),
+            blurRadius: 20,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
@@ -23,41 +48,61 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           child: Row(
             children: [
-              // Back Button with modern design
+              // Back Button with glassmorphism effect
               GestureDetector(
                 onTap: () => Navigator.pop(context),
                 child: Container(
-                  width: 40,
-                  height: 40,
+                  width: 44,
+                  height: 44,
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade100,
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey.shade200, width: 1),
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.3),
+                      width: 1.5,
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 8,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
                   ),
-                  child: const Icon(
+                  child: Icon(
                     Icons.arrow_back_ios_new,
-                    color: Colors.black87,
+                    color: iconColor ?? Colors.white,
                     size: 18,
                   ),
                 ),
               ),
 
-              // Title in center
+              // Title in center with shadow effect
               Expanded(
                 child: Text(
                   title,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    color: Color(0xFFFF69B4),
-                    fontSize: 24,
+                  style: TextStyle(
+                    color: titleColor ?? Colors.white,
+                    fontSize: 26,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 0.5,
+                    letterSpacing: 0.8,
+                    shadows: [
+                      Shadow(
+                        color: Colors.black.withOpacity(0.2),
+                        offset: const Offset(0, 2),
+                        blurRadius: 4,
+                      ),
+                    ],
                   ),
                 ),
               ),
 
-              // Spacer to keep title centered
-              const SizedBox(width: 40),
+              // Actions or spacer
+              if (actions != null && actions!.isNotEmpty)
+                Row(children: actions!)
+              else
+                const SizedBox(width: 44),
             ],
           ),
         ),

@@ -100,12 +100,12 @@ class TopicData {
       title: 'Vehicle',
       imagePath: 'assets/images/topics/cars6cover.png',
       imageCollection: [
-        'assets/images/collections/Vehicle/car1.png',
-        'assets/images/collections/Vehicle/car2.png',
-        'assets/images/collections/Vehicle/car3.png',
-        'assets/images/collections/Vehicle/car4.png',
-        'assets/images/collections/Vehicle/car5.png',
-        'assets/images/collections/Vehicle/car6cover.png',
+        'assets/images/collections/Vehicle/cars1.png',
+        'assets/images/collections/Vehicle/cars2.png',
+        'assets/images/collections/Vehicle/cars3.png',
+        'assets/images/collections/Vehicle/cars4.png',
+        'assets/images/collections/Vehicle/cars5.png',
+        'assets/images/collections/Vehicle/cars6cover.png',
       ],
     ),
     TopicModel(
