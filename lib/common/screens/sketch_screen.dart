@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'dart:math';
 
 class SketchScreen extends StatefulWidget {
   final String imagePath;
@@ -16,11 +17,16 @@ class _SketchScreenState extends State<SketchScreen> {
   bool isLocked = false;
   bool isFlashOn = false;
   bool isExtended = false;
+  bool isFlipped = false;
 
   double _scale = 1.0;
+  double _rotation = 0.0; // rotation in radians
   Offset _offset = Offset.zero;
+
   Offset _startFocalPoint = Offset.zero;
   double _startScale = 1.0;
+  double _startRotation = 0.0;
+  Offset _startOffset = Offset.zero;
 
   CameraController? _cameraController;
   bool _isCameraInitialized = false;
@@ -82,6 +88,12 @@ class _SketchScreenState extends State<SketchScreen> {
     }
   }
 
+  void _flipImage() {
+    setState(() {
+      isFlipped = !isFlipped;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,45 +104,54 @@ class _SketchScreenState extends State<SketchScreen> {
           else
             const Center(child: CircularProgressIndicator()),
 
-          // ======= IMAGE OVERLAY (asset or file) =======
+          // ===== IMAGE OVERLAY WITH ZOOM, PAN, ROTATE, FLIP =====
           Positioned.fill(
             child: GestureDetector(
               onScaleStart: isLocked
                   ? null
                   : (details) {
                       _startScale = _scale;
-                      _startFocalPoint = details.focalPoint - _offset;
+                      _startRotation = _rotation;
+                      _startFocalPoint = details.focalPoint;
+                      _startOffset = _offset;
                     },
               onScaleUpdate: isLocked
                   ? null
                   : (details) {
                       setState(() {
+                        // Smooth scale around center
                         _scale = (_startScale * details.scale).clamp(0.5, 5.0);
-                        _offset =
-                            details.focalPoint -
-                            _startFocalPoint * details.scale;
+
+                        // Rotation
+                        _rotation = _startRotation + details.rotation;
+
+                        // Move image relative to focal point
+                        final delta = details.focalPoint - _startFocalPoint;
+                        _offset = _startOffset + delta;
                       });
                     },
-              child: Transform.translate(
-                offset: _offset,
-                child: Transform.scale(
-                  scale: _scale,
-                  child: Center(
-                    child: Opacity(
-                      opacity: opacity,
-                      child: widget.imagePath.startsWith('assets/')
-                          ? Image.asset(widget.imagePath, fit: BoxFit.contain)
-                          : Image.file(
-                              File(widget.imagePath),
-                              fit: BoxFit.contain,
-                            ),
-                    ),
+              child: Center(
+                child: Transform(
+                  alignment: Alignment.center,
+                  transform: Matrix4.identity()
+                    ..translate(_offset.dx, _offset.dy)
+                    ..rotateZ(_rotation)
+                    ..scale(isFlipped ? -_scale : _scale, _scale),
+                  child: Opacity(
+                    opacity: opacity,
+                    child: widget.imagePath.startsWith('assets/')
+                        ? Image.asset(widget.imagePath, fit: BoxFit.contain)
+                        : Image.file(
+                            File(widget.imagePath),
+                            fit: BoxFit.contain,
+                          ),
                   ),
                 ),
               ),
             ),
           ),
 
+          // ===== TOP BUTTONS =====
           if (!isExtended)
             Positioned(
               top: 0,
@@ -153,6 +174,7 @@ class _SketchScreenState extends State<SketchScreen> {
               ),
             ),
 
+          // ===== BOTTOM CONTROL BUTTONS =====
           if (!isExtended)
             Positioned(
               bottom: 0,
@@ -181,6 +203,11 @@ class _SketchScreenState extends State<SketchScreen> {
                         icon: isFlashOn ? Icons.flash_on : Icons.flash_off,
                         label: 'Flash',
                         onTap: _toggleFlash,
+                      ),
+                      _buildControlButton(
+                        icon: Icons.flip,
+                        label: 'Flip',
+                        onTap: _flipImage,
                       ),
                       _buildControlButton(
                         icon: Icons.fullscreen,
