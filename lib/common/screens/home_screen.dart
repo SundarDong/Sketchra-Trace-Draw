@@ -12,7 +12,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: const ModernAppBar(title: 'Sketch'),
+      appBar: const ModernAppBar(title: 'Sketch', showBackButton: false),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(

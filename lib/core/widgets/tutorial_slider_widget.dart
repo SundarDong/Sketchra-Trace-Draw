@@ -81,7 +81,7 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
-            height: pageHeight, // increased height
+            height: pageHeight,
             child: PageView.builder(
               controller: _pageController,
               onPageChanged: (index) => setState(() => _currentPage = index),

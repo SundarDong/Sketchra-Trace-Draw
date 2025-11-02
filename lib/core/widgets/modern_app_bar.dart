@@ -7,6 +7,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? titleColor;
   final Color? iconColor;
   final List<Widget>? actions;
+  final bool showBackButton; // ✅ new
 
   const ModernAppBar({
     super.key,
@@ -16,6 +17,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleColor,
     this.iconColor,
     this.actions,
+    this.showBackButton = true, // ✅ default true for other screens
   });
 
   @override
@@ -48,36 +50,38 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
           child: Row(
             children: [
-              // Back Button with glassmorphism effect
-              GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Container(
-                  width: 44,
-                  height: 44,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(14),
-                    border: Border.all(
-                      color: Colors.white.withOpacity(0.3),
-                      width: 1.5,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.1),
-                        blurRadius: 8,
-                        offset: const Offset(0, 2),
+              // ✅ Conditionally show back button
+              if (showBackButton)
+                GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(14),
+                      border: Border.all(
+                        color: Colors.white.withOpacity(0.3),
+                        width: 1.5,
                       ),
-                    ],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 8,
+                          offset: const Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Icon(
+                      Icons.arrow_back_ios_new,
+                      color: iconColor ?? Colors.white,
+                      size: 18,
+                    ),
                   ),
-                  child: Icon(
-                    Icons.arrow_back_ios_new,
-                    color: iconColor ?? Colors.white,
-                    size: 18,
-                  ),
-                ),
-              ),
-
-              // Title in center with shadow effect
+                )
+              else
+                const SizedBox(width: 44), // Keep title centered
+              // Title
               Expanded(
                 child: Text(
                   title,

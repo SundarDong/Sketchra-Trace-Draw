@@ -47,7 +47,7 @@ class TutorialPage extends StatelessWidget {
                         ],
                       ),
                       child: Text(
-                        'Steps ${step.stepNumber}',
+                        'Step ${step.stepNumber}',
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,

@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
-import 'dart:math';
+import 'package:sketchtrace/core/widgets/help_dialog_sketch.dart';
 
 class SketchScreen extends StatefulWidget {
   final String imagePath;
@@ -167,7 +167,10 @@ class _SketchScreenState extends State<SketchScreen> {
                         icon: Icons.arrow_back,
                         onTap: () => Navigator.pop(context),
                       ),
-                      _topButton(icon: Icons.help_outline, onTap: () {}),
+                      _topButton(
+                        icon: Icons.help_outline,
+                        onTap: () => HelpDialog.show(context),
+                      ),
                     ],
                   ),
                 ),

@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'dart:math';
+import 'package:sketchtrace/core/widgets/help_dialog_trace.dart';
 
 class TraceScreen extends StatefulWidget {
   final String imagePath;
@@ -92,7 +92,10 @@ class _TraceScreenState extends State<TraceScreen> {
                         icon: Icons.arrow_back,
                         onTap: () => Navigator.pop(context),
                       ),
-                      _topButton(icon: Icons.help_outline, onTap: () {}),
+                      _topButton(
+                        icon: Icons.help_outline,
+                        onTap: () => TraceHelpDialog.show(context),
+                      ),
                     ],
                   ),
                 ),
