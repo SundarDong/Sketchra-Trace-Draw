@@ -42,24 +42,23 @@ class SocialLinksSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SocialButton(
-                icon: Icons.facebook,
-                color: const Color(0xFF1877F2),
+                imagePath: 'assets/images/social/facebook.jpeg',
                 label: 'Facebook',
-                url: 'https://facebook.com/yourpage',
+                url: 'https://www.facebook.com/share/1VxEYWeTeK/',
                 onTap: onLaunchUrl,
               ),
+
               SocialButton(
-                icon: Icons.camera_alt, // For Instagram
-                color: const Color(0xFFE4405F),
+                imagePath: 'assets/images/social/instagram.jpeg',
                 label: 'Instagram',
-                url: 'https://instagram.com/yourpage',
+                url: 'https://www.instagram.com/appsketchra',
                 onTap: onLaunchUrl,
               ),
+
               SocialButton(
-                icon: Icons.ondemand_video, // For YouTube
-                color: const Color(0xFFFF0000),
+                imagePath: 'assets/images/social/youtube.jpeg',
                 label: 'YouTube',
-                url: 'https://youtube.com/yourchannel',
+                url: 'https://www.youtube.com/@Sketchratracedraw',
                 onTap: onLaunchUrl,
               ),
             ],
@@ -69,24 +68,22 @@ class SocialLinksSection extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SocialButton(
-                icon: Icons.chat, // For Twitter
-                color: const Color(0xFF1DA1F2),
+                imagePath: 'assets/images/social/twitter.jpeg',
                 label: 'Twitter',
-                url: 'https://twitter.com/yourpage',
+                url: 'https://x.com/Appsketchra?t=FC-HJf6fCg6GiXZ3DOW7KA&s=09',
                 onTap: onLaunchUrl,
               ),
               SocialButton(
-                icon: Icons.music_note, // For TikTok
-                color: Colors.black,
+                imagePath: 'assets/images/social/tiktok.jpeg',
                 label: 'TikTok',
-                url: 'https://tiktok.com/@yourpage',
+                url:
+                    'https://www.tiktok.com/@sketchra.ar.trace?_r=1&_t=ZS-9179aEYDMcH',
                 onTap: onLaunchUrl,
               ),
               SocialButton(
-                icon: Icons.public, // For Website
-                color: const Color(0xFF0088CC),
+                imagePath: 'assets/images/social/website.jpeg',
                 label: 'Website',
-                url: 'https://yourwebsite.com',
+                url: 'Sketchra.com',
                 onTap: onLaunchUrl,
               ),
             ],

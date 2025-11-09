@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
 class SocialButton extends StatelessWidget {
-  final IconData icon;
-  final Color color;
+  final String imagePath;
   final String label;
   final String url;
   final Future<void> Function(String) onTap;
 
   const SocialButton({
     super.key,
-    required this.icon,
-    required this.color,
+    required this.imagePath,
     required this.label,
     required this.url,
     required this.onTap,
@@ -25,12 +23,13 @@ class SocialButton extends StatelessWidget {
           Container(
             width: 60,
             height: 60,
-            decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(16),
-              border: Border.all(color: color.withOpacity(0.3), width: 2),
+            alignment: Alignment.center,
+            child: Image.asset(
+              imagePath,
+              width: 40, // Fixed width for uniformity
+              height: 40, // Fixed height for uniformity
+              fit: BoxFit.contain,
             ),
-            child: Icon(icon, color: color, size: 28),
           ),
           const SizedBox(height: 8),
           Text(

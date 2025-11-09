@@ -272,7 +272,7 @@ class _SplashScreenState extends State<SplashScreen>
                         const SizedBox(height: 8),
                         // Tagline
                         const Text(
-                          'Trace & Draw',
+                          ' AR Trace & Draw',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.white70,
