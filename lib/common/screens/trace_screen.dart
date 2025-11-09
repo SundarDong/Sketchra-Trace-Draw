@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:screen_brightness/screen_brightness.dart';
 import 'package:sketchtrace/core/widgets/help_dialog_trace.dart';
 
 class TraceScreen extends StatefulWidget {
@@ -26,14 +27,48 @@ class _TraceScreenState extends State<TraceScreen> {
   double _startRotation = 0.0;
   Offset _startOffset = Offset.zero;
 
+  double _previousBrightness = 0.5;
+
+  @override
+  void initState() {
+    super.initState();
+    _setMaxBrightness();
+  }
+
+  @override
+  void dispose() {
+    _restoreBrightness();
+    super.dispose();
+  }
+
+  /// Save current brightness and set screen brightness to maximum
+  Future<void> _setMaxBrightness() async {
+    try {
+      _previousBrightness = await ScreenBrightness().current;
+      await ScreenBrightness().setScreenBrightness(1.0);
+    } catch (e) {
+      debugPrint('Failed to set brightness: $e');
+    }
+  }
+
+  /// Restore previous brightness when screen is disposed
+  Future<void> _restoreBrightness() async {
+    try {
+      await ScreenBrightness().setScreenBrightness(_previousBrightness);
+    } catch (e) {
+      debugPrint('Failed to restore brightness: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
+          // Super bright background
           Positioned.fill(child: Container(color: Colors.white)),
 
-          // IMAGE WITH ZOOM, ROTATE, PAN, FLIP
+          // Image with gestures
           Positioned.fill(
             child: GestureDetector(
               onScaleStart: isLocked
