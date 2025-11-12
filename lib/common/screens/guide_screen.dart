@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 import 'package:sketchtrace/core/widgets/social_links_section.dart';
 import 'package:sketchtrace/core/widgets/tutorial_slider_widget.dart';
@@ -59,13 +60,11 @@ class _GuideScreenState extends State<GuideScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const SizedBox(height: 4),
+            4.verticalSpace,
             const TutorialSliderWidget(),
-            const SizedBox(height: 8),
-            // VideoSection(controller: _controller),
-            // const SizedBox(height: 8),
+            8.verticalSpace,
             SocialLinksSection(onLaunchUrl: _launchUrl),
-            const SizedBox(height: 24),
+            24.verticalSpace,
           ],
         ),
       ),

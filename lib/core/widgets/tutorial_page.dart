@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/models/tutorial_step.dart';
 
 class TutorialPage extends StatelessWidget {
@@ -16,10 +17,7 @@ class TutorialPage extends StatelessWidget {
             constraints: BoxConstraints(minHeight: constraints.maxHeight),
             child: Center(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 24,
-                  vertical: 20,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 20.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   mainAxisSize: MainAxisSize.min,
@@ -27,9 +25,9 @@ class TutorialPage extends StatelessWidget {
                     // Step number circle
                     // Step number circle
                     Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 10,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 16.w,
+                        vertical: 10.h,
                       ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
@@ -37,48 +35,48 @@ class TutorialPage extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                         ),
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(30.r),
                         boxShadow: [
                           BoxShadow(
                             color: step.color.withOpacity(0.3),
-                            blurRadius: 12,
-                            offset: const Offset(0, 4),
+                            blurRadius: 12.r,
+                            offset: Offset(0, 4.h),
                           ),
                         ],
                       ),
                       child: Text(
                         'Step ${step.stepNumber}',
-                        style: const TextStyle(
-                          fontSize: 18,
+                        style: TextStyle(
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    20.verticalSpace,
 
                     //image container
                     Container(
-                      width: 180,
-                      height: 180,
+                      width: 180.w,
+                      height: 180.h,
                       decoration: BoxDecoration(
                         color: step.color.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(16),
+                        borderRadius: BorderRadius.circular(16.r),
                         border: Border.all(
                           color: step.color.withOpacity(0.2),
-                          width: 2,
+                          width: 2.w,
                         ),
                       ),
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(14),
+                        borderRadius: BorderRadius.circular(14.r),
                         child: Image.asset(
                           step.imagePath,
                           fit: BoxFit.cover,
                           errorBuilder: (context, error, stackTrace) {
                             return Icon(
                               Icons.image_not_supported_outlined,
-                              size: 48,
+                              size: 48.sp,
                               color: step.color.withOpacity(0.5),
                             );
                           },
@@ -86,15 +84,15 @@ class TutorialPage extends StatelessWidget {
                       ),
                     ),
 
-                    const SizedBox(height: 20),
+                    20.verticalSpace,
 
                     // Description
                     Text(
                       step.description,
                       style: TextStyle(
-                        fontSize: 13,
+                        fontSize: 13.sp,
                         color: Colors.grey.shade600,
-                        height: 1.5,
+                        height: 1.5.h,
                         fontWeight: FontWeight.bold,
                       ),
                       textAlign: TextAlign.center,

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/common/screens/sketch_screen.dart';
 import 'package:sketchtrace/common/screens/trace_screen.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
@@ -23,30 +24,30 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
       appBar: const ModernAppBar(title: 'Select mode'),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0.r),
           child: Column(
             children: [
               // Image Display
               Container(
                 width: double.infinity,
-                height: 500,
+                height: 500.h,
                 decoration: BoxDecoration(
                   color: Colors.grey.shade200,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.1),
-                      blurRadius: 12,
-                      offset: const Offset(0, 4),
+                      blurRadius: 12.r,
+                      offset: Offset(0, 4.h),
                     ),
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(20.r),
                   child: _buildImage(widget.imagePath),
                 ),
               ),
-              const SizedBox(height: 24),
+              24.verticalSpace,
 
               // Mode Selection Buttons
               Row(
@@ -54,13 +55,13 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
                   Expanded(
                     child: _buildModeButton('Sketch', selectedMode == 'Sketch'),
                   ),
-                  const SizedBox(width: 16),
+                  16.horizontalSpace,
                   Expanded(
                     child: _buildModeButton('Trace', selectedMode == 'Trace'),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              16.verticalSpace,
 
               // Description Text
               Text(
@@ -68,18 +69,18 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
                     ? 'Draw through the phone\'s camera, with various supporting features.'
                     : 'Trace over the image to create your drawing.',
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: 14.sp,
                   color: Colors.grey.shade600,
-                  height: 1.5,
+                  height: 1.5.h,
                 ),
                 textAlign: TextAlign.center,
               ),
-              const SizedBox(height: 32),
+              32.verticalSpace,
 
               // Draw Now Button
               SizedBox(
                 width: double.infinity,
-                height: 56,
+                height: 56.h,
                 child: ElevatedButton(
                   onPressed: () {
                     if (selectedMode == 'Sketch') {
@@ -103,14 +104,14 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF69B4),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
                     elevation: 0,
                   ),
-                  child: const Text(
+                  child: Text(
                     'Draw now',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
@@ -153,11 +154,11 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.broken_image, color: Colors.grey.shade400, size: 40),
-            const SizedBox(height: 8),
+            Icon(Icons.broken_image, color: Colors.grey.shade400, size: 40.sp),
+            8.verticalSpace,
             Text(
               'Image not found',
-              style: TextStyle(color: Colors.grey.shade600, fontSize: 13),
+              style: TextStyle(color: Colors.grey.shade600, fontSize: 13.sp),
             ),
           ],
         ),
@@ -174,10 +175,10 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
         });
       },
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: EdgeInsets.symmetric(vertical: 16.r),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
             color: isSelected ? const Color(0xFFFF69B4) : Colors.grey.shade300,
             width: isSelected ? 2 : 1,
@@ -186,8 +187,8 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
               ? [
                   BoxShadow(
                     color: const Color(0xFFFF69B4).withOpacity(0.2),
-                    blurRadius: 10,
-                    offset: const Offset(0, 4),
+                    blurRadius: 10.r,
+                    offset: Offset(0, 4.h),
                   ),
                 ]
               : [],
@@ -196,7 +197,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
           child: Text(
             mode,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 18.sp,
               fontWeight: FontWeight.bold,
               color: isSelected ? const Color(0xFFFF69B4) : Colors.black87,
             ),

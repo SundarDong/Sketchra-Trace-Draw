@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -7,7 +8,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? titleColor;
   final Color? iconColor;
   final List<Widget>? actions;
-  final bool showBackButton; // ✅ new
+  final bool showBackButton;
 
   const ModernAppBar({
     super.key,
@@ -17,7 +18,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.titleColor,
     this.iconColor,
     this.actions,
-    this.showBackButton = true, // ✅ default true for other screens
+    this.showBackButton = true,
   });
 
   @override
@@ -40,47 +41,47 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
         boxShadow: [
           BoxShadow(
             color: const Color(0xFFFF69B4).withOpacity(0.3),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
+            blurRadius: 20.r,
+            offset: Offset(0, 4.h),
           ),
         ],
       ),
       child: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0.w, vertical: 12.0.h),
           child: Row(
             children: [
-              // ✅ Conditionally show back button
+              // Conditionally show back button
               if (showBackButton)
                 GestureDetector(
                   onTap: () => Navigator.pop(context),
                   child: Container(
-                    width: 44,
-                    height: 44,
+                    width: 44.w,
+                    height: 44.h,
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(14),
+                      borderRadius: BorderRadius.circular(14.r),
                       border: Border.all(
                         color: Colors.white.withOpacity(0.3),
-                        width: 1.5,
+                        width: 1.5.w,
                       ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
-                          blurRadius: 8,
-                          offset: const Offset(0, 2),
+                          blurRadius: 8.r,
+                          offset: Offset(0, 2.h),
                         ),
                       ],
                     ),
                     child: Icon(
                       Icons.arrow_back_ios_new,
                       color: iconColor ?? Colors.white,
-                      size: 18,
+                      size: 18.sp,
                     ),
                   ),
                 )
               else
-                const SizedBox(width: 44), // Keep title centered
+                44.horizontalSpace,
               // Title
               Expanded(
                 child: Text(
@@ -88,14 +89,14 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: titleColor ?? Colors.white,
-                    fontSize: 26,
+                    fontSize: 26.sp,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 0.8,
+                    letterSpacing: 0.8.sp,
                     shadows: [
                       Shadow(
                         color: Colors.black.withOpacity(0.2),
-                        offset: const Offset(0, 2),
-                        blurRadius: 4,
+                        offset: Offset(0, 2.h),
+                        blurRadius: 4.r,
                       ),
                     ],
                   ),
@@ -106,7 +107,7 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
               if (actions != null && actions!.isNotEmpty)
                 Row(children: actions!)
               else
-                const SizedBox(width: 44),
+                44.horizontalSpace,
             ],
           ),
         ),
@@ -115,5 +116,5 @@ class ModernAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => Size.fromHeight(70.h);
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/core/widgets/social_button.dart';
 
 class SocialLinksSection extends StatelessWidget {
@@ -9,16 +10,16 @@ class SocialLinksSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 16),
-      padding: const EdgeInsets.all(20),
+      margin: EdgeInsets.symmetric(horizontal: 16.w),
+      padding: EdgeInsets.all(20.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
+            blurRadius: 20.r,
+            offset: Offset(0, 4.h),
           ),
         ],
       ),
@@ -27,17 +28,17 @@ class SocialLinksSection extends StatelessWidget {
           Text(
             'Connect With Us',
             style: TextStyle(
-              fontSize: 20,
+              fontSize: 20.sp,
               fontWeight: FontWeight.bold,
               color: Colors.grey.shade800,
             ),
           ),
-          const SizedBox(height: 8),
+          8.verticalSpace,
           Text(
             'Follow us on social media',
-            style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+            style: TextStyle(fontSize: 14.sp, color: Colors.grey.shade600),
           ),
-          const SizedBox(height: 24),
+          24.verticalSpace,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -63,7 +64,7 @@ class SocialLinksSection extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 16),
+          16.verticalSpace,
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [

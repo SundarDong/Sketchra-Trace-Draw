@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TopicCard extends StatelessWidget {
   final String imagePath;
@@ -19,12 +20,12 @@ class TopicCard extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(16.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+              blurRadius: 10.r,
+              offset: Offset(0, 4.h),
             ),
           ],
         ),
@@ -33,16 +34,16 @@ class TopicCard extends StatelessWidget {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(16.0.r),
                 child: Image.asset(imagePath, fit: BoxFit.contain),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 16.0),
+              padding: EdgeInsets.only(bottom: 16.0.r),
               child: Text(
                 title,
-                style: const TextStyle(
-                  fontSize: 18,
+                style: TextStyle(
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                   color: Colors.black87,
                 ),

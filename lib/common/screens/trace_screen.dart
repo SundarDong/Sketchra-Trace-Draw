@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 import 'package:sketchtrace/core/widgets/help_dialog_trace.dart';
 
@@ -119,7 +120,7 @@ class _TraceScreenState extends State<TraceScreen> {
               right: 0,
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.all(16),
+                  padding: EdgeInsets.all(16.r),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -145,9 +146,9 @@ class _TraceScreenState extends State<TraceScreen> {
               right: 0,
               child: SafeArea(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 20.r,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -187,8 +188,8 @@ class _TraceScreenState extends State<TraceScreen> {
           // EXIT FULLSCREEN
           if (isExtended)
             Positioned(
-              top: 40,
-              right: 20,
+              top: 40.h,
+              right: 20.w,
               child: SafeArea(
                 child: _topButton(
                   icon: Icons.fullscreen_exit,
@@ -205,12 +206,12 @@ class _TraceScreenState extends State<TraceScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(12.r),
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, color: Colors.black87, size: 28),
+        child: Icon(icon, color: Colors.black87, size: 28.sp),
       ),
     );
   }
@@ -227,19 +228,19 @@ class _TraceScreenState extends State<TraceScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: const EdgeInsets.all(14),
+            padding: EdgeInsets.all(14.r),
             decoration: BoxDecoration(
               color: Colors.grey.shade200,
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: color, size: 28),
+            child: Icon(icon, color: color, size: 28.sp),
           ),
-          const SizedBox(height: 8),
+          8.verticalSpace,
           Text(
             label,
             style: TextStyle(
               color: Colors.grey.shade700,
-              fontSize: 12,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -258,23 +259,23 @@ class _TraceScreenState extends State<TraceScreen> {
         return StatefulBuilder(
           builder: (context, setModalState) {
             return Container(
-              padding: const EdgeInsets.all(20),
-              decoration: const BoxDecoration(
+              padding: EdgeInsets.all(20.r),
+              decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     'Adjust Opacity',
                     style: TextStyle(
                       color: Colors.black87,
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  20.verticalSpace,
                   Slider(
                     value: localOpacity,
                     min: 0.0,
@@ -286,28 +287,28 @@ class _TraceScreenState extends State<TraceScreen> {
                       setState(() => opacity = value);
                     },
                   ),
-                  const SizedBox(height: 10),
+                  10.verticalSpace,
                   Text(
                     '${(localOpacity * 100).toInt()}%',
-                    style: const TextStyle(color: Colors.black87, fontSize: 16),
+                    style: TextStyle(color: Colors.black87, fontSize: 16.sp),
                   ),
-                  const SizedBox(height: 20),
+                  20.verticalSpace,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () => Navigator.pop(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF69B4),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16.r),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Done',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

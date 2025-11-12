@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/common/screens/select_mode_screen.dart';
 import 'package:sketchtrace/common/screens/topic_collection_screen.dart';
 import 'package:sketchtrace/models/topic_model.dart';
@@ -7,9 +8,14 @@ import 'package:sketchtrace/core/widgets/import_button.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
 
-class DrawingTopicsScreen extends StatelessWidget {
+class DrawingTopicsScreen extends StatefulWidget {
   const DrawingTopicsScreen({super.key});
 
+  @override
+  State<DrawingTopicsScreen> createState() => _DrawingTopicsScreenState();
+}
+
+class _DrawingTopicsScreenState extends State<DrawingTopicsScreen> {
   Future<void> _pickImageFromGallery(BuildContext context) async {
     final ImagePicker picker = ImagePicker();
     try {
@@ -78,20 +84,20 @@ class DrawingTopicsScreen extends StatelessWidget {
       appBar: const ModernAppBar(title: 'Sketch'),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0.r),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Import Photo Section
-              const Text(
+              Text(
                 'Import photo',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
-              const SizedBox(height: 16),
+              16.verticalSpace,
               Row(
                 children: [
                   Expanded(
@@ -102,7 +108,7 @@ class DrawingTopicsScreen extends StatelessWidget {
                       onTap: () => _pickImageFromGallery(context),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  12.horizontalSpace,
                   Expanded(
                     child: ImportButton(
                       icon: Icons.camera_alt,
@@ -113,27 +119,27 @@ class DrawingTopicsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 32),
+              32.verticalSpace,
 
               // Choose Topic Section
-              const Text(
+              Text(
                 'Choose topic',
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 22.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
                 ),
               ),
-              const SizedBox(height: 16),
+              16.verticalSpace,
 
               // Topics Grid - Using data from TopicData
               GridView.builder(
                 shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                physics: NeverScrollableScrollPhysics(),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16.w,
+                  mainAxisSpacing: 16.h,
                   childAspectRatio: 0.85,
                 ),
                 itemCount: TopicData.topics.length,

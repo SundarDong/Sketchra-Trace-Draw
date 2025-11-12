@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/core/widgets/navigation_buttons.dart';
 import 'package:sketchtrace/core/widgets/page_indicators.dart';
 import 'package:sketchtrace/core/widgets/tutorial_page.dart';
@@ -65,15 +66,15 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
     // 55% of screen height — adjust as needed
 
     return Container(
-      margin: const EdgeInsets.all(16),
+      margin: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
+            blurRadius: 20.r,
+            offset: Offset(0, 4.h),
           ),
         ],
       ),
@@ -91,7 +92,7 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
                   TutorialPage(step: _steps[index]),
             ),
           ),
-          const SizedBox(height: 10),
+          10.verticalSpace,
           PageIndicators(currentPage: _currentPage, steps: _steps),
           NavigationButtons(
             currentPage: _currentPage,
@@ -100,7 +101,7 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
             onPrevious: () => _animateToPage(_currentPage - 1),
             onNext: () => _animateToPage(_currentPage + 1),
           ),
-          const SizedBox(height: 20),
+          20.verticalSpace,
         ],
       ),
     );

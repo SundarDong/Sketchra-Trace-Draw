@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/core/widgets/help_dialog_sketch.dart';
 
 class SketchScreen extends StatefulWidget {
@@ -159,7 +160,7 @@ class _SketchScreenState extends State<SketchScreen> {
               right: 0,
               child: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(16.0.r),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -185,9 +186,9 @@ class _SketchScreenState extends State<SketchScreen> {
               right: 0,
               child: SafeArea(
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 20,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 20.h,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -225,8 +226,8 @@ class _SketchScreenState extends State<SketchScreen> {
 
           if (isExtended)
             Positioned(
-              top: 40,
-              right: 20,
+              top: 40.h,
+              right: 20.w,
               child: SafeArea(
                 child: _topButton(
                   icon: Icons.fullscreen_exit,
@@ -243,12 +244,12 @@ class _SketchScreenState extends State<SketchScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(12),
+        padding: EdgeInsets.all(12.r),
         decoration: BoxDecoration(
           color: Colors.black.withOpacity(0.5),
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, color: Colors.white, size: 28),
+        child: Icon(icon, color: Colors.white, size: 28.sp),
       ),
     );
   }
@@ -264,21 +265,21 @@ class _SketchScreenState extends State<SketchScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Container(
-            padding: const EdgeInsets.all(14),
+            padding: EdgeInsets.all(14.r),
             decoration: BoxDecoration(
               color: Colors.black.withOpacity(0.6),
               shape: BoxShape.circle,
             ),
-            child: Icon(icon, color: Colors.white, size: 28),
+            child: Icon(icon, color: Colors.white, size: 28.sp),
           ),
-          const SizedBox(height: 8),
+          8.verticalSpace,
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 12,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w500,
-              shadows: [Shadow(color: Colors.black, blurRadius: 4)],
+              shadows: [Shadow(color: Colors.black, blurRadius: 4.r)],
             ),
           ),
         ],
@@ -297,32 +298,30 @@ class _SketchScreenState extends State<SketchScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setModalState) {
             return Container(
-              padding: const EdgeInsets.all(20),
+              padding: EdgeInsets.all(20.r),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: const BorderRadius.vertical(
-                  top: Radius.circular(20),
-                ),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
                     blurRadius: 10,
-                    offset: const Offset(0, -5),
+                    offset: Offset(0, -5.h),
                   ),
                 ],
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     'Adjust Opacity',
                     style: TextStyle(
                       color: Colors.black87,
-                      fontSize: 18,
+                      fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  20.verticalSpace,
                   Slider(
                     value: localOpacity,
                     min: 0.0,
@@ -338,32 +337,32 @@ class _SketchScreenState extends State<SketchScreen> {
                       });
                     },
                   ),
-                  const SizedBox(height: 10),
+                  10.verticalSpace,
                   Text(
                     '${(localOpacity * 100).toInt()}%',
-                    style: const TextStyle(
+                    style: TextStyle(
                       color: Colors.black87,
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  20.verticalSpace,
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       onPressed: () => Navigator.pop(context),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF69B4),
-                        padding: const EdgeInsets.symmetric(vertical: 16),
+                        padding: EdgeInsets.symmetric(vertical: 16.r),
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(12.r),
                         ),
                       ),
-                      child: const Text(
+                      child: Text(
                         'Done',
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: 16,
+                          fontSize: 16.sp,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

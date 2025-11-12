@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SocialButton extends StatelessWidget {
   final String imagePath;
@@ -21,21 +22,21 @@ class SocialButton extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 60,
-            height: 60,
+            width: 60.w,
+            height: 60.h,
             alignment: Alignment.center,
             child: Image.asset(
               imagePath,
-              width: 40, // Fixed width for uniformity
-              height: 40, // Fixed height for uniformity
+              width: 40.w,
+              height: 40.h,
               fit: BoxFit.contain,
             ),
           ),
-          const SizedBox(height: 8),
+          8.verticalSpace,
           Text(
             label,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 12.sp,
               fontWeight: FontWeight.w500,
               color: Colors.grey.shade700,
             ),

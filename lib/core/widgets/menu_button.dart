@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class MenuButton extends StatelessWidget {
   final VoidCallback? onTap;
@@ -12,23 +13,23 @@ class MenuButton extends StatelessWidget {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        height: 150,
+        height: 150.h,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(30),
+          borderRadius: BorderRadius.circular(30.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),
-              blurRadius: 12,
-              offset: const Offset(0, 6),
+              blurRadius: 12.r,
+              offset: Offset(0, 6.h),
             ),
           ],
           color: Colors.white, // simple background
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: EdgeInsets.all(16.0.r),
           child: Center(
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
+              borderRadius: BorderRadius.circular(20.r),
               child: Image.asset(
                 imagePath,
                 fit: BoxFit.cover,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SketchAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
@@ -25,15 +26,15 @@ class SketchAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: showBackButton
           ? IconButton(
               icon: Container(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(8.r),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(12.r),
                 ),
-                child: const Icon(
+                child: Icon(
                   Icons.arrow_back_ios_new,
                   color: Colors.black87,
-                  size: 20,
+                  size: 20.sp,
                 ),
               ),
               onPressed: () => Navigator.pop(context),
@@ -43,17 +44,17 @@ class SketchAppBar extends StatelessWidget implements PreferredSizeWidget {
         title,
         style: TextStyle(
           color: titleColor ?? const Color(0xFFFF69B4),
-          fontSize: 26,
+          fontSize: 26.sp,
           fontWeight: FontWeight.bold,
-          letterSpacing: 0.5,
+          letterSpacing: 0.5.sp,
         ),
       ),
       centerTitle: true,
       actions: actions,
       bottom: PreferredSize(
-        preferredSize: const Size.fromHeight(1),
+        preferredSize: Size.fromHeight(1.h),
         child: Container(
-          height: 1,
+          height: 1.h,
           decoration: BoxDecoration(
             gradient: LinearGradient(
               colors: [

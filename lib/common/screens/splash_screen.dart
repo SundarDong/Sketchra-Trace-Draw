@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'dart:async';
 import 'home_screen.dart';
 
@@ -214,30 +215,30 @@ class _SplashScreenState extends State<SplashScreen>
                       child: FadeTransition(
                         opacity: _fadeAnimation,
                         child: Container(
-                          width: 180,
-                          height: 180,
+                          width: 180.w,
+                          height: 180.h,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            borderRadius: BorderRadius.circular(40),
+                            borderRadius: BorderRadius.circular(40.r),
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.3),
-                                blurRadius: 25,
+                                blurRadius: 25.r,
                                 offset: Offset(
                                   0,
                                   15 - _verticalAnimation.value / 3,
                                 ),
-                                spreadRadius: 5,
+                                spreadRadius: 5.r,
                               ),
                             ],
                           ),
                           child: Center(
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(40),
+                              borderRadius: BorderRadius.circular(40.r),
                               child: Image.asset(
                                 'assets/logo/newlogo.png',
-                                width: 150,
-                                height: 150,
+                                width: 150.w,
+                                height: 150.h,
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -249,7 +250,7 @@ class _SplashScreenState extends State<SplashScreen>
                 },
               ),
 
-              const SizedBox(height: 50),
+              50.verticalSpace,
 
               // Animated text
               AnimatedBuilder(
@@ -260,23 +261,23 @@ class _SplashScreenState extends State<SplashScreen>
                     child: Column(
                       children: [
                         // Company name
-                        const Text(
+                        Text(
                           'Sketchra',
                           style: TextStyle(
-                            fontSize: 36,
+                            fontSize: 36.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
-                            letterSpacing: 2,
+                            letterSpacing: 2.sp,
                           ),
                         ),
-                        const SizedBox(height: 8),
+                        8.verticalSpace,
                         // Tagline
-                        const Text(
+                        Text(
                           ' AR Trace & Draw',
                           style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 18.sp,
                             color: Colors.white70,
-                            letterSpacing: 1.5,
+                            letterSpacing: 1.5.sp,
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -286,7 +287,7 @@ class _SplashScreenState extends State<SplashScreen>
                 },
               ),
 
-              const SizedBox(height: 50),
+              50.verticalSpace,
 
               // Loading indicator
               AnimatedBuilder(
@@ -294,11 +295,11 @@ class _SplashScreenState extends State<SplashScreen>
                 builder: (context, child) {
                   return FadeTransition(
                     opacity: _textFadeAnimation,
-                    child: const SizedBox(
-                      width: 30,
-                      height: 30,
+                    child: SizedBox(
+                      width: 30.w,
+                      height: 30.h,
                       child: CircularProgressIndicator(
-                        strokeWidth: 3,
+                        strokeWidth: 3.sp,
                         valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                       ),
                     ),
