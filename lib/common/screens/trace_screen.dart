@@ -5,6 +5,7 @@ import 'package:screen_brightness/screen_brightness.dart';
 import 'package:sketchtrace/core/widgets/help_dialog_trace.dart';
 
 class TraceScreen extends StatefulWidget {
+  static const String traceModeScreenRoute = "/traceModeScreenRoute";
   final String imagePath;
 
   const TraceScreen({super.key, required this.imagePath});

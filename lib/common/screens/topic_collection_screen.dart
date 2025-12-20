@@ -3,8 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/models/topic_model.dart';
 import 'package:sketchtrace/common/screens/select_mode_screen.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
+import 'package:sketchtrace/utils/app_routing/app_routes.dart';
 
 class TopicCollectionScreen extends StatefulWidget {
+  static const String topicCollectionScreenRoute =
+      "/topicCollectionScreenRoute";
   final TopicModel topic;
 
   const TopicCollectionScreen({super.key, required this.topic});
@@ -15,11 +18,10 @@ class TopicCollectionScreen extends StatefulWidget {
 
 class _TopicCollectionScreenState extends State<TopicCollectionScreen> {
   void _onImageTap(BuildContext context, String imagePath) {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-        builder: (context) => SelectModeScreen(imagePath: imagePath),
-      ),
+      AppRoutes.selectModeScreenRoute,
+      arguments: imagePath,
     );
   }
 

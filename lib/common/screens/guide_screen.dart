@@ -7,6 +7,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GuideScreen extends StatefulWidget {
+  static const String guideScreenRoute = "/guideScreenRoute";
   const GuideScreen({super.key});
 
   @override

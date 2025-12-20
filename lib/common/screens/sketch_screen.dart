@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/core/widgets/help_dialog_sketch.dart';
 
 class SketchScreen extends StatefulWidget {
+  static const String sketchModeScreenRoute = "/sketchModeScreenRoute";
   final String imagePath;
 
   const SketchScreen({super.key, required this.imagePath});

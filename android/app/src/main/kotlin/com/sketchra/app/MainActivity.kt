@@ -1,4 +1,4 @@
-package com.example.sketchtrace
+package com.sketchra.app
 
 import io.flutter.embedding.android.FlutterActivity
 

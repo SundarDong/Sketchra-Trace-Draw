@@ -7,8 +7,10 @@ import 'package:sketchtrace/core/widgets/topic_card.dart';
 import 'package:sketchtrace/core/widgets/import_button.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sketchtrace/utils/app_routing/app_routes.dart';
 
 class DrawingTopicsScreen extends StatefulWidget {
+  static const String drawScreenRoute = "/drawScreenRoute";
   const DrawingTopicsScreen({super.key});
 
   @override
@@ -25,11 +27,10 @@ class _DrawingTopicsScreenState extends State<DrawingTopicsScreen> {
       );
 
       if (image != null && context.mounted) {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (context) => SelectModeScreen(imagePath: image.path),
-          ),
+          AppRoutes.selectModeScreenRoute,
+          arguments: image.path,
         );
       }
     } catch (e) {
@@ -51,11 +52,10 @@ class _DrawingTopicsScreenState extends State<DrawingTopicsScreen> {
       );
 
       if (image != null && context.mounted) {
-        Navigator.push(
+        Navigator.pushNamed(
           context,
-          MaterialPageRoute(
-            builder: (context) => SelectModeScreen(imagePath: image.path),
-          ),
+          AppRoutes.selectModeScreenRoute,
+          arguments: image.path,
         );
       }
     } catch (e) {
@@ -69,11 +69,10 @@ class _DrawingTopicsScreenState extends State<DrawingTopicsScreen> {
   }
 
   void _onTopicTap(BuildContext context, TopicModel topic) {
-    Navigator.push(
+    Navigator.pushNamed(
       context,
-      MaterialPageRoute(
-        builder: (context) => TopicCollectionScreen(topic: topic),
-      ),
+      AppRoutes.topicCollectionScreenRoute,
+      arguments: topic,
     );
   }
 

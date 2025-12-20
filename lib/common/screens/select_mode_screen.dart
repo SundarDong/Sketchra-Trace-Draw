@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sketchtrace/common/screens/sketch_screen.dart';
 import 'package:sketchtrace/common/screens/trace_screen.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
+import 'package:sketchtrace/utils/app_routing/app_routes.dart';
 
 class SelectModeScreen extends StatefulWidget {
+  static const String selectModeScreenRoute = "/selectModeScreenRoute";
   final String imagePath;
 
   const SelectModeScreen({super.key, required this.imagePath});
@@ -84,23 +86,20 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
                 child: ElevatedButton(
                   onPressed: () {
                     if (selectedMode == 'Sketch') {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              SketchScreen(imagePath: widget.imagePath),
-                        ),
+                        AppRoutes.sketchModeScreenRoute,
+                        arguments: widget.imagePath,
                       );
                     } else {
-                      Navigator.push(
+                      Navigator.pushNamed(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TraceScreen(imagePath: widget.imagePath),
-                        ),
+                        AppRoutes.traceModeScreenRoute,
+                        arguments: widget.imagePath,
                       );
                     }
                   },
+
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF69B4),
                     shape: RoundedRectangleBorder(

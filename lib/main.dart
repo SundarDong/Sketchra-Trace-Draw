@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'common/screens/splash_screen.dart';
+import 'package:sketchtrace/utils/app_routing/route_generator.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +25,8 @@ class MyApp extends StatelessWidget {
           title: 'Sketchra',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-          home: const SplashScreen(),
+          initialRoute: "/",
+          onGenerateRoute: RouteGenerator.generateRoute,
         );
       },
     );

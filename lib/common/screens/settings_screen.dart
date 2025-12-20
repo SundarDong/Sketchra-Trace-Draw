@@ -5,6 +5,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 
 class SettingsScreen extends StatefulWidget {
+  static const String settingScreenRoute = "/settingScreenRoute";
   const SettingsScreen({super.key});
 
   @override
@@ -12,13 +13,14 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+  // Replace with your actual package name
+  static const String _androidPackageName = 'com.sketchra.app';
+
   // Rate app function
   Future<void> _rateApp(BuildContext context) async {
-    const String androidUrl =
-        'https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME';
-    const String iosUrl = 'https://apps.apple.com/app/idYOUR_APP_ID';
-
-    final Uri url = Uri.parse(androidUrl);
+    final Uri url = Uri.parse(
+      'https://play.google.com/store/apps/details?id=$_androidPackageName&reviewId=0',
+    );
 
     try {
       if (await canLaunchUrl(url)) {
@@ -26,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       } else {
         if (context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Could not open app store')),
+            const SnackBar(content: Text('Could not open Play Store')),
           );
         }
       }
@@ -41,10 +43,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   // Share app function
   void _shareApp() {
-    const String appName = 'SketchTrace';
-    const String appUrl =
-        'https://play.google.com/store/apps/details?id=YOUR_PACKAGE_NAME';
-    const String shareText = 'Check out $appName! Download it here: $appUrl';
+    final String appName = 'SketchTrace';
+    final String appUrl =
+        'https://play.google.com/store/apps/details?id=$_androidPackageName';
+    final String shareText = 'Check out $appName! Download it here: $appUrl';
 
     Share.share(shareText);
   }
