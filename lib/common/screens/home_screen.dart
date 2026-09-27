@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sketchtrace/common/screens/widgets/app_version_widget.dart';
+import 'package:sketchtrace/core/widgets/custom_inner_appbar.dart';
 import 'package:sketchtrace/core/widgets/menu_button.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 import 'package:sketchtrace/utils/app_routing/app_routes.dart';
@@ -65,12 +67,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: const ModernAppBar(title: 'Sketch', showBackButton: false),
+      appBar: const CustomInnerAppBar(title: "Sketch", showBackButton: false),
       body: Padding(
         padding: EdgeInsets.all(16.0.r),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment
-              .spaceBetween, // <-- space between buttons and watermark
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               children: [
@@ -97,16 +98,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
 
-            // Watermark
-            Text(
-              'Designed by Sundar Dong',
-              style: TextStyle(
-                fontSize: 12.sp,
-                color: Colors.grey.shade500,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-            10.verticalSpace,
+            // App Version & Copyright
+            const AppVersionWidget(),
           ],
         ),
       ),

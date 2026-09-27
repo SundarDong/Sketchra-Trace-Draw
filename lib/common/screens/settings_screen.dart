@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sketchtrace/core/widgets/custom_inner_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
@@ -7,7 +8,6 @@ import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 class SettingsScreen extends StatefulWidget {
   static const String settingScreenRoute = "/settingScreenRoute";
   const SettingsScreen({super.key});
-
   @override
   State<SettingsScreen> createState() => _SettingsScreenState();
 }
@@ -55,7 +55,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: const ModernAppBar(title: 'Settings'),
+      appBar: const CustomInnerAppBar(title: "Settings"),
       body: ListView(
         padding: EdgeInsets.all(16.0.r),
         children: [
@@ -90,14 +90,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required VoidCallback onTap,
   }) {
     return Card(
-      elevation: 2,
+      color: Colors.white,
+      elevation: 3,
+      shadowColor: Colors.black.withOpacity(0.10),
+      surfaceTintColor: Colors.transparent,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
         leading: Container(
           padding: EdgeInsets.all(10.r),
           decoration: BoxDecoration(
-            color: iconColor.withOpacity(0.1),
+            color: iconColor.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(10.r),
           ),
           child: Icon(icon, color: iconColor, size: 28.sp),

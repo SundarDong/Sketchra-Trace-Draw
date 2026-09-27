@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sketchtrace/common/screens/select_mode_screen.dart';
-import 'package:sketchtrace/common/screens/topic_collection_screen.dart';
+import 'package:sketchtrace/core/widgets/custom_inner_appbar.dart';
 import 'package:sketchtrace/models/topic_model.dart';
 import 'package:sketchtrace/core/widgets/topic_card.dart';
 import 'package:sketchtrace/core/widgets/import_button.dart';
@@ -80,7 +79,7 @@ class _DrawingTopicsScreenState extends State<DrawingTopicsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: const ModernAppBar(title: 'Sketch'),
+      appBar: const CustomInnerAppBar(title: "Sketch"),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0.r),

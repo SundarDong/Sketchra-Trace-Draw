@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sketchtrace/core/widgets/navigation_buttons.dart';
-import 'package:sketchtrace/core/widgets/page_indicators.dart';
-import 'package:sketchtrace/core/widgets/tutorial_page.dart';
 import 'package:sketchtrace/models/tutorial_step.dart';
 
 class TutorialSliderWidget extends StatefulWidget {
@@ -13,36 +10,38 @@ class TutorialSliderWidget extends StatefulWidget {
 }
 
 class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
+  static const _accentColor = Color(0xFF029849);
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
-  final List<TutorialStep> _steps = [
+  static List<TutorialStep> _steps = [
     TutorialStep(
       stepNumber: 1,
       description: 'Place a glass upside down on top of a sheet of paper.',
       imagePath: 'assets/images/guide/step1.png',
-      color: const Color(0xFF6366F1),
+      color: _accentColor,
     ),
     TutorialStep(
       stepNumber: 2,
       description:
-          'Position your phone on top of the glass— the Sketchra app will project the image using your camera view.',
+          'Position your phone on top of the glass — the app will project the image using your camera view.',
       imagePath: 'assets/images/guide/step2.png',
-      color: const Color(0xFF10B981),
+      color: _accentColor,
     ),
     TutorialStep(
       stepNumber: 3,
       description:
-          'Select the image and adjust the opacity and size to align the virtual image perfectly with your paper.',
+          'Select the image and adjust the opacity and size to align it with your paper.',
       imagePath: 'assets/images/guide/step3.png',
-      color: const Color(0xFFF59E0B),
+      color: _accentColor,
     ),
     TutorialStep(
       stepNumber: 4,
       description:
-          'Trace the visible lines on your paper while looking through your phone screen. Once finished, add details and shading to complete your sketch.',
+          'Trace the visible lines on your paper, then add details and shading.',
       imagePath: 'assets/images/guide/step4.png',
-      color: const Color(0xFFEC4899),
+      color: _accentColor,
     ),
   ];
 
@@ -52,56 +51,120 @@ class _TutorialSliderWidgetState extends State<TutorialSliderWidget> {
     super.dispose();
   }
 
-  void _animateToPage(int page) {
-    _pageController.animateToPage(
-      page,
-      duration: const Duration(milliseconds: 800),
-      curve: Curves.easeInOut,
-    );
+  void _next() {
+    if (_currentPage < _steps.length - 1) {
+      _pageController.animateToPage(
+        _currentPage + 1,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    final double pageHeight = MediaQuery.of(context).size.height * 0.55;
-    // 55% of screen height — adjust as needed
+    final isLastPage = _currentPage == _steps.length - 1;
 
     return Container(
       margin: EdgeInsets.all(16.r),
+      padding: EdgeInsets.all(16.r),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(20.r),
+        borderRadius: BorderRadius.circular(16.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
-            blurRadius: 20.r,
+            color: Colors.black.withOpacity(0.06),
+            blurRadius: 16.r,
             offset: Offset(0, 4.h),
           ),
         ],
       ),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
         children: [
           SizedBox(
-            height: pageHeight,
+            height: 380.h,
             child: PageView.builder(
               controller: _pageController,
               onPageChanged: (index) => setState(() => _currentPage = index),
               itemCount: _steps.length,
               physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) =>
-                  TutorialPage(step: _steps[index]),
+              itemBuilder: (context, index) {
+                final step = _steps[index];
+                return Column(
+                  children: [
+                    Text(
+                      'Step ${step.stepNumber}',
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w600,
+                        color: _accentColor,
+                      ),
+                    ),
+                    12.verticalSpace,
+                    Expanded(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.r),
+                        child: Image.asset(
+                          step.imagePath,
+                          width: double.infinity,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                    12.verticalSpace,
+                    Text(
+                      step.description,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: Colors.black87,
+                        height: 1.4,
+                      ),
+                    ),
+                  ],
+                );
+              },
             ),
           ),
-          10.verticalSpace,
-          PageIndicators(currentPage: _currentPage, steps: _steps),
-          NavigationButtons(
-            currentPage: _currentPage,
-            totalPages: _steps.length,
-            currentColor: _steps[_currentPage].color,
-            onPrevious: () => _animateToPage(_currentPage - 1),
-            onNext: () => _animateToPage(_currentPage + 1),
+          16.verticalSpace,
+          // Plain dot indicators — no color per step
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: List.generate(_steps.length, (index) {
+              final isActive = index == _currentPage;
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                margin: EdgeInsets.symmetric(horizontal: 4.w),
+                width: isActive ? 20.w : 6.w,
+                height: 6.h,
+                decoration: BoxDecoration(
+                  color: isActive ? Colors.black87 : Colors.black26,
+                  borderRadius: BorderRadius.circular(3.r),
+                ),
+              );
+            }),
           ),
-          20.verticalSpace,
+          16.verticalSpace,
+          SizedBox(
+            width: double.infinity,
+            height: 48.h,
+            child: ElevatedButton(
+              onPressed: isLastPage ? null : _next,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: _accentColor,
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+                elevation: 0,
+              ),
+              child: Text(
+                isLastPage ? 'Done' : 'Next',
+                style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+              ),
+            ),
+          ),
         ],
       ),
     );

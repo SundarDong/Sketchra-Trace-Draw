@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sketchtrace/core/widgets/custom_inner_appbar.dart';
 import 'package:sketchtrace/models/topic_model.dart';
 import 'package:sketchtrace/common/screens/select_mode_screen.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
@@ -29,7 +30,7 @@ class _TopicCollectionScreenState extends State<TopicCollectionScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: ModernAppBar(title: widget.topic.title),
+      appBar: CustomInnerAppBar(title: widget.topic.title),
       body: Padding(
         padding: EdgeInsets.all(16.0.r),
         child: Column(

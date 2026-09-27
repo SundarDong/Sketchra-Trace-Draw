@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sketchtrace/core/widgets/color_constant.dart';
 
 class HelpDialog extends StatelessWidget {
   const HelpDialog({super.key});
@@ -33,7 +34,7 @@ class HelpDialog extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22.sp,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFFFF69B4),
+                    color: ColorConstant.primaryColor,
                   ),
                 ),
                 IconButton(
@@ -79,7 +80,7 @@ class HelpDialog extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () => Navigator.pop(context),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFFF69B4),
+                  backgroundColor: ColorConstant.primaryColor,
                   padding: EdgeInsets.symmetric(vertical: 14.r),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12.r),
@@ -108,8 +109,8 @@ class HelpDialog extends StatelessWidget {
         Container(
           width: 28.w,
           height: 28.h,
-          decoration: const BoxDecoration(
-            color: Color(0xFFFF69B4),
+          decoration: BoxDecoration(
+            color: ColorConstant.primaryColor,
             shape: BoxShape.circle,
           ),
           child: Center(

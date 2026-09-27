@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sketchtrace/core/widgets/custom_inner_appbar.dart';
 import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
 import 'package:sketchtrace/core/widgets/social_links_section.dart';
 import 'package:sketchtrace/core/widgets/tutorial_slider_widget.dart';
@@ -57,7 +58,7 @@ class _GuideScreenState extends State<GuideScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: const ModernAppBar(title: 'Guide'),
+      appBar: const CustomInnerAppBar(title: "Guide"),
       body: SingleChildScrollView(
         child: Column(
           children: [

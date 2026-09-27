@@ -1,9 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:sketchtrace/common/screens/sketch_screen.dart';
-import 'package:sketchtrace/common/screens/trace_screen.dart';
-import 'package:sketchtrace/core/widgets/modern_app_bar.dart';
+import 'package:sketchtrace/core/widgets/color_constant.dart';
+import 'package:sketchtrace/core/widgets/custom_inner_appbar.dart';
 import 'package:sketchtrace/utils/app_routing/app_routes.dart';
 
 class SelectModeScreen extends StatefulWidget {
@@ -23,7 +22,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade50,
-      appBar: const ModernAppBar(title: 'Select mode'),
+      appBar: const CustomInnerAppBar(title: "Select mode"),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(16.0.r),
@@ -101,7 +100,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
                   },
 
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFFF69B4),
+                    backgroundColor: ColorConstant.primaryColor,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16.r),
                     ),
@@ -179,13 +178,15 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.r),
           border: Border.all(
-            color: isSelected ? const Color(0xFFFF69B4) : Colors.grey.shade300,
+            color: isSelected
+                ? ColorConstant.primaryColor
+                : Colors.grey.shade300,
             width: isSelected ? 2 : 1,
           ),
           boxShadow: isSelected
               ? [
                   BoxShadow(
-                    color: const Color(0xFFFF69B4).withOpacity(0.2),
+                    color: ColorConstant.primaryColor.withOpacity(0.2),
                     blurRadius: 10.r,
                     offset: Offset(0, 4.h),
                   ),
@@ -198,7 +199,7 @@ class _SelectModeScreenState extends State<SelectModeScreen> {
             style: TextStyle(
               fontSize: 18.sp,
               fontWeight: FontWeight.bold,
-              color: isSelected ? const Color(0xFFFF69B4) : Colors.black87,
+              color: isSelected ? ColorConstant.primaryColor : Colors.black87,
             ),
           ),
         ),
